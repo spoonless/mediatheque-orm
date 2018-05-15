@@ -6,18 +6,33 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
 import com.cgi.poei.mediatheque.document.Film;
 import com.cgi.poei.mediatheque.exception.PasAssezAgeException;
 import com.cgi.poei.mediatheque.exception.QuotaEmpruntDepasseException;
 import com.cgi.poei.mediatheque.exception.QuotaEmpruntFilmDepasseException;
 
+@Entity
 public class Usager implements Emprunteur {
 
-	private final String code;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
+	private String code;
 	private String nom;
 	private String prenom;
 	private LocalDate dateNaissance;
+	
+	@Transient
 	private List<Pret> prets = new ArrayList<>();
+	
+	protected Usager() {
+	}
 
 	public Usager(String code, String prenom, String nom) {
 		this(code, prenom, nom, (LocalDate) null);
@@ -108,6 +123,14 @@ public class Usager implements Emprunteur {
 
 	public String getNomComplet() {
 		return this.prenom + " " + this.nom;
+	}
+	
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
 	}
 
 }
