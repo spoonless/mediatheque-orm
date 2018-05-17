@@ -6,10 +6,12 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import com.cgi.poei.mediatheque.document.Film;
@@ -27,6 +29,9 @@ public class Usager implements Emprunteur {
 	private String nom;
 	private String prenom;
 	private LocalDate dateNaissance;
+	
+	@OneToOne(cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
+	private Adresse adresse;
 	
 	@Transient
 	private List<Pret> prets = new ArrayList<>();
@@ -131,6 +136,18 @@ public class Usager implements Emprunteur {
 	
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
+	}
+
+	public Adresse getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
+	
+	public Integer getId() {
+		return id;
 	}
 
 }
