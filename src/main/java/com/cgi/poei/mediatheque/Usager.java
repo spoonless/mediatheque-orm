@@ -11,8 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 
 import com.cgi.poei.mediatheque.document.Film;
 import com.cgi.poei.mediatheque.exception.PasAssezAgeException;
@@ -33,7 +33,7 @@ public class Usager implements Emprunteur {
 	@OneToOne(cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
 	private Adresse adresse;
 	
-	@Transient
+	@OneToMany(mappedBy="emprunteur", cascade=CascadeType.ALL)
 	private List<Pret> prets = new ArrayList<>();
 	
 	protected Usager() {
