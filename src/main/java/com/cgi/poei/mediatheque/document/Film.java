@@ -2,8 +2,13 @@ package com.cgi.poei.mediatheque.document;
 
 import java.time.Year;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import com.cgi.poei.mediatheque.Section;
 
+@Entity
+@DiscriminatorValue("film")
 public class Film extends Document {
 
 	public static final int NB_PRETS_FILMS_AUTORISES = 3;
@@ -12,6 +17,10 @@ public class Film extends Document {
 	private String realisateur;
 	private String isbn;
 	
+	protected Film() {
+		
+	}
+
 	public Film(String isbn, String titre, String realisateur, String editeur, Year anneeEdition) {
 		this(isbn, titre, realisateur, editeur, anneeEdition, Section.TOUT_PUBLIC);
 	}

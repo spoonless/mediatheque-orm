@@ -2,9 +2,17 @@ package com.cgi.poei.mediatheque.document;
 
 import java.time.Year;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("livre")
 public class Livre extends Document {
 	private String isbn;
 	private String auteur;
+
+	protected Livre() {
+	}
 
 	public Livre(String isbn, String titre, String auteur, String editeur, Year anneeEdition) {
 		super(titre, editeur, anneeEdition);

@@ -2,9 +2,17 @@ package com.cgi.poei.mediatheque.document;
 
 import java.time.Year;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("revue")
 public class Revue extends Document {
 
 	private String issn;
+	
+	protected Revue() {
+	}
 
 	public Revue(String issn, String titre, String editeur, Year anneEdition) {
 		super(titre, editeur, anneEdition);

@@ -4,17 +4,39 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Transient;
+
 import com.cgi.poei.mediatheque.Exemplaire;
 import com.cgi.poei.mediatheque.Section;
 
+@Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="document_type")
 public abstract class Document {
 
-	private List<Exemplaire> exemplaires = new ArrayList<>();
-
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
+	@Enumerated(EnumType.STRING)
 	private Section section;
 	private String titre;
 	private String editeur;
 	private Year anneeEdition;
+	
+	@Transient
+	private List<Exemplaire> exemplaires = new ArrayList<>();
+	
+	protected Document() {
+	}
 	
 	public Document(String titre, String editeur, Year anneeEdition) {
 		this(titre, editeur, anneeEdition, Section.TOUT_PUBLIC);
