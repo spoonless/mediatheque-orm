@@ -11,7 +11,7 @@ import com.cgi.poei.mediatheque.exception.InscriptionException;
 @Stateless
 public class InscripteurUsager {
 	
-	@PersistenceContext(name="mediatheque")
+	@PersistenceContext(unitName="mediatheque")
 	private EntityManager entityManager;
 	
 	public Usager inscrire(String nom, String prenom, LocalDate dateNaissance) throws InscriptionException {
