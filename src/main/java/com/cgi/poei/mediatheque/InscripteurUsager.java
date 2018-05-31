@@ -38,7 +38,7 @@ public class InscripteurUsager {
 		
 	}
 
-	public String genererCode(String nom, String prenom, LocalDate dateNaissance) {
+	private String genererCode(String nom, String prenom, LocalDate dateNaissance) {
 		String annee = dateNaissance != null ? String.valueOf(dateNaissance.getYear()) : "0000";
 		String debutNom = nom.length() == 1 ? nom + nom : nom.substring(0, 2);
 		return debutNom + prenom.substring(0, 1) + annee;
