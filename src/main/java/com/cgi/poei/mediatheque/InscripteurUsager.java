@@ -52,6 +52,12 @@ public class InscripteurUsager {
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
+
+	public void deleteByCode(String code) {
+		entityManager.createQuery("delete from Usager u where u.code = :code")
+		             .setParameter("code", code)
+		             .executeUpdate();
+	}
 	
 }
 
