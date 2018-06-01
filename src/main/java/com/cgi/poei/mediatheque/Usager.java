@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import com.cgi.poei.mediatheque.document.Film;
 import com.cgi.poei.mediatheque.exception.PasAssezAgeException;
@@ -20,6 +22,7 @@ import com.cgi.poei.mediatheque.exception.QuotaEmpruntDepasseException;
 import com.cgi.poei.mediatheque.exception.QuotaEmpruntFilmDepasseException;
 
 @Entity
+@XmlRootElement(name="usager")
 public class Usager implements Emprunteur {
 
 	@Id
@@ -146,6 +149,7 @@ public class Usager implements Emprunteur {
 		this.adresse = adresse;
 	}
 	
+	@XmlTransient
 	public Integer getId() {
 		return id;
 	}

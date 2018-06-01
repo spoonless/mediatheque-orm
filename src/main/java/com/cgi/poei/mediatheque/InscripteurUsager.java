@@ -38,6 +38,11 @@ public class InscripteurUsager {
 		
 	}
 
+	public Usager getByCode(String code) {
+		return entityManager.createQuery("select u from Usager u where u.code = :code", Usager.class)
+				            .setParameter("code", code).getSingleResult();
+	}
+
 	private String genererCode(String nom, String prenom, LocalDate dateNaissance) {
 		String annee = dateNaissance != null ? String.valueOf(dateNaissance.getYear()) : "0000";
 		String debutNom = nom.length() == 1 ? nom + nom : nom.substring(0, 2);
@@ -47,5 +52,25 @@ public class InscripteurUsager {
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
-
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
